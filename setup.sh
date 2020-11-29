@@ -13,7 +13,14 @@ RootDistanceMaxSec=5
 PollIntervalMinSec=32
 PollIntervalMaxSec=2048
 EOT
-apt install -y rpi-eeprom
+
 apt update
 apt -y upgrade
+apt install -y raspi-config rpi-eeprom
 rpi-eeprom-update -d -a
+
+echo "installing raspi-config"
+wget https://archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20200601_all.deb -P /tmp
+apt -y install libnewt0.52 whiptail parted triggerhappy lua5.1 alsa-utils
+apt install -fy
+dpkg -i /tmp/raspi-config_20200601_all.deb
